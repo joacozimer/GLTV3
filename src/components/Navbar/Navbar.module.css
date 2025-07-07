@@ -1,0 +1,358 @@
+/* src/components/Navbar/Navbar.module.css */
+.navbar {
+    background-color: var(--color-white);
+    /* Default background */
+    padding: 15px 30px;
+    margin: 20px;
+    /* Margin from top and sides */
+    border-radius: 15px;
+    /* More rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Slightly stronger shadow */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    /* Smoother transitions */
+    position: sticky;
+    /* Make it sticky for "scrolling with the page" */
+    top: 20px;
+    /* Aligns with margin, adjusts as you scroll */
+    z-index: 1000;
+    /* Ensure it stays on top */
+}
+
+/* Dark mode styles for navbar */
+[data-theme='dark'] .navbar {
+    background-color: var(--color-technologies-grey);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    /* Stronger shadow for dark mode */
+}
+
+.navbarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    /* Adjust as needed */
+    border-radius: 8px;
+    /* Rounded corners for logo */
+    overflow: hidden;
+    /* Clip any potential overflow from rounded corners */
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.08);
+    /* Slightly more pronounced scaling */
+}
+
+.navLinks {
+    display: flex;
+    gap: 25px;
+    /* Space between links */
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--color-technologies-grey);
+    font-family: 'Montserrat Regular', sans-serif;
+    font-size: 1.1em;
+    position: relative;
+    display: flex;
+    /* Allow icon and text to sit side-by-side */
+    align-items: center;
+    padding: 8px 15px;
+    /* Add some padding to the link area */
+    border-radius: 8px;
+    /* Rounded corners for nav links */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
+    /* Smoother transitions */
+}
+
+.navIcon {
+    margin-right: 8px;
+    /* Space between icon and text */
+    font-size: 1.2em;
+    /* Adjust icon size */
+    transition: color 0.3s ease-in-out;
+}
+
+.navLink::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: inherit;
+    /* Inherit rounded corners */
+    transition: background-color 0.3s ease-in-out;
+    z-index: -1;
+    /* Place behind text and icon */
+}
+
+.navLink:hover::before {
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Subtle hover background */
+}
+
+[data-theme='dark'] .navLink:hover::before {
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Subtle dark mode hover */
+}
+
+.navLink:hover {
+    color: var(--color-greenlime-dark);
+    transform: translateY(-2px);
+}
+
+.navLink:hover .navIcon {
+    color: var(--color-greenlime-dark);
+}
+
+/* Dark mode styles for nav links */
+[data-theme='dark'] .navLink {
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .navLink:hover {
+    color: var(--color-greenlime-light);
+}
+
+[data-theme='dark'] .navLink:hover .navIcon {
+    color: var(--color-greenlime-light);
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Space between settings and sandwich menu */
+}
+
+.settingsToggle {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    /* Make it circular */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.settingsToggle:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    /* Slightly darker hover */
+}
+
+[data-theme='dark'] .settingsToggle:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Slightly lighter dark mode hover */
+}
+
+.cogIcon {
+    font-size: 1.8em;
+    color: var(--color-technologies-grey);
+    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+}
+
+[data-theme='dark'] .cogIcon {
+    color: var(--color-white);
+}
+
+.settingsToggle:hover .cogIcon {
+    transform: rotate(90deg);
+    /* Spin effect on hover */
+}
+
+.settingsDropdown {
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    /* Position below the cog icon */
+    right: 0;
+    background-color: var(--color-white);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    min-width: 200px;
+    /* Ensure enough space for text and icon */
+    padding: 8px 0;
+    /* Add some padding around the buttons */
+}
+
+[data-theme='dark'] .settingsDropdown {
+    background-color: var(--color-technologies-grey);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.settingsDropdown.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdownButton {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    /* Slightly reduced vertical padding */
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Montserrat Regular', sans-serif;
+    color: var(--color-technologies-grey);
+    font-size: 1em;
+    display: flex;
+    /* Align icon and text */
+    align-items: center;
+    gap: 10px;
+    /* Space between icon and text in dropdown */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    border-radius: 5px;
+    /* Rounded corners for dropdown buttons */
+    margin: 5px 10px;
+    /* Add some margin for spacing between buttons */
+}
+
+.dropdownButton:hover {
+    background-color: var(--color-greenlime-light);
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .dropdownButton {
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .dropdownButton:hover {
+    background-color: var(--color-greenlime-dark);
+}
+
+.buttonIcon {
+    font-size: 1.1em;
+}
+
+
+/* Sandwich Menu */
+.sandwichMenu {
+    display: none;
+    /* Hidden by default, shown on smaller screens */
+    cursor: pointer;
+    padding: 10px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-technologies-grey);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+[data-theme='dark'] .bar {
+    background-color: var(--color-white);
+}
+
+.dropdownMenu {
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    /* Adjust based on navbar height and margin */
+    right: 20px;
+    /* Align with navbar margin */
+    background-color: var(--color-white);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+[data-theme='dark'] .dropdownMenu {
+    background-color: var(--color-technologies-grey);
+}
+
+.dropdownMenu.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdownLink {
+    /* Used for links inside the responsive dropdown */
+    background-color: transparent;
+    border: none;
+    padding: 12px 20px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Montserrat Regular', sans-serif;
+    color: var(--color-technologies-grey);
+    font-size: 1em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.dropdownLink:hover {
+    background-color: var(--color-greenlime-light);
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .dropdownLink {
+    color: var(--color-white);
+}
+
+[data-theme='dark'] .dropdownLink:hover {
+    background-color: var(--color-greenlime-dark);
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+
+    /* Adjust breakpoint for tablets/smaller desktops */
+    .navLinks {
+        display: none;
+        /* Hide regular links on smaller screens */
+    }
+
+    .sandwichMenu {
+        display: block;
+        /* Show sandwich menu icon */
+    }
+
+    .settingsToggle {
+        /* Keep settings toggle visible */
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        margin: 15px;
+        /* Slightly less margin on smaller screens */
+        padding: 10px 20px;
+    }
+
+    .settingsDropdown,
+    .dropdownMenu {
+        top: 70px;
+        /* Adjust dropdown position for smaller navbar height */
+        right: 15px;
+    } }

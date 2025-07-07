@@ -1,0 +1,54 @@
+/* src/components/Footer/Footer.module.css */
+.footer {
+    background-color: var(--color-technologies-grey);
+    /* Using a corporate color for footer */
+    color: var(--color-white);
+    padding: 30px 20px;
+    text-align: center;
+    font-family: 'Montserrat Regular', sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+[data-theme='dark'] .footer {
+    background-color: #333;
+    /* A slightly different dark shade for footer */
+    color: var(--color-white);
+}
+
+.footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footerLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.footerLink {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footerLink:hover {
+    color: var(--color-greenlime-light);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footerLinks {
+        flex-direction: column;
+        gap: 10px;
+    } }
