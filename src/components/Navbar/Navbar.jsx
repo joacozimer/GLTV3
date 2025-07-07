@@ -13,11 +13,6 @@ const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslate
     const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Keep local state for menu
     const [isSettingsOpen, setIsSettingsOpen] = React.useState(false); // Keep local state for settings
 
-    // useEffect para el modo oscuro se mantiene aquí si solo afecta a este componente,
-    // pero ya está centralizado en App.js para el 'data-theme' del documento.
-    // Si el Navbar necesita reaccionar de forma específica, se puede mantener.
-    // En este caso, isDarkMode ya viene como prop, así que no es necesario un useEffect aquí.
-
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode); // Llama a la función de App.js
     };

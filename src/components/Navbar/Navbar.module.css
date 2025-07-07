@@ -2,7 +2,8 @@
 .navbar {
     background-color: var(--color-white);
     /* Default background */
-    padding: 15px 30px;
+    padding: 10px 30px;
+    /* Reduced vertical padding from 15px to 10px */
     margin: 20px;
     /* Margin from top and sides */
     border-radius: 20px;
@@ -160,16 +161,22 @@
 }
 
 .settingsToggle {
+    /* MODIFIED: Reduced size for consistency */
     position: relative;
     cursor: pointer;
-    padding: 12px;
-    /* Slightly larger clickable area */
+    padding: 10px;
+    /* Reduced padding */
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.03);
-    /* Very light default background */
     transition: background-color 0.3s ease-in-out, transform 0.3s ease-out;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    /* Very subtle initial shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    /* Reduced width */
+    height: 40px;
+    /* Reduced height */
 }
 
 .settingsToggle:hover {
@@ -191,8 +198,9 @@
 }
 
 .cogIcon {
-    font-size: 2em;
-    /* Larger cog icon */
+    /* MODIFIED: Reduced font-size */
+    font-size: 1.6em;
+    /* Smaller cog icon */
     color: var(--color-technologies-grey);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
         /* Spring-like rotation */
@@ -209,27 +217,29 @@
 }
 
 .settingsDropdown {
-    display: none;
     flex-direction: column;
     position: absolute;
     top: 70px;
-    /* Adjusted position below larger cog icon */
     right: 0;
+    /* Align right */
     background-color: var(--color-white);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-    /* Deeper shadow for dropdown */
     border-radius: 12px;
-    /* More rounded corners */
     overflow: hidden;
     z-index: 1000;
     opacity: 0;
+    max-height: 0;
+    /* Hidden state */
     transform: translateY(-15px);
-    /* More pronounced initial translateY */
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        max-height 0.5s ease-out;
+    /* Added max-height transition */
     min-width: 220px;
-    /* Wider dropdown */
-    padding: 10px 0;
-    /* Increased vertical padding */
+    padding: 0;
+    /* Remove padding from container, add to buttons */
+    pointer-events: none;
+    /* Prevent interaction when hidden */
 }
 
 [data-theme='dark'] .settingsDropdown {
@@ -240,7 +250,13 @@
 .settingsDropdown.open {
     display: flex;
     opacity: 1;
+    max-height: 300px;
+    /* A value large enough to contain all content */
     transform: translateY(0);
+    padding: 10px 0;
+    /* Added padding when open */
+    pointer-events: auto;
+    /* Allow interaction when open */
 }
 
 .dropdownButton {
@@ -260,8 +276,8 @@
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-out;
     border-radius: 8px;
     /* More rounded corners for dropdown buttons */
-    margin: 6px 12px;
-    /* Increased margin for spacing */
+    margin: 8px 12px;
+    /* Increased vertical margin for more spacing */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     /* Subtle shadow on buttons */
 }
@@ -293,20 +309,27 @@
 /* Sandwich Menu */
 .sandwichMenu {
     display: none;
+    /* MODIFIED: Added flex-direction and centering for bars */
+    flex-direction: column;
+    /* Stack bars vertically */
+    justify-content: center;
+    /* Center bars vertically */
+    align-items: center;
+    /* Center bars horizontally */
     cursor: pointer;
     padding: 10px;
+    z-index: 1001;
 }
 
 .bar {
+    /* MODIFIED: Adjusted height and margin for thinner, closer bars */
     width: 30px;
-    /* Slightly wider bars */
-    height: 4px;
-    /* Slightly thicker bars */
+    height: 3px;
+    /* Reduced thickness */
     background-color: var(--color-technologies-grey);
-    margin: 6px 0;
-    /* More space between bars */
+    margin: 4px 0;
+    /* Reduced vertical separation */
     border-radius: 2px;
-    /* Rounded ends for bars */
     transition: all 0.3s ease-in-out;
 }
 
@@ -316,7 +339,9 @@
 
 /* Animation for opening/closing sandwich menu */
 .sandwichMenu.open .bar:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    /* MODIFIED: Adjusted translateY for new bar height/margin */
+    transform: translateY(7px) rotate(45deg);
+    /* Adjusted for new bar height and margin */
 }
 
 .sandwichMenu.open .bar:nth-child(2) {
@@ -324,57 +349,82 @@
 }
 
 .sandwichMenu.open .bar:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    /* MODIFIED: Adjusted translateY for new bar height/margin */
+    transform: translateY(-7px) rotate(-45deg);
+    /* Adjusted for new bar height and margin */
 }
 
 .dropdownMenu {
-    display: none;
+    /* Styles for the dropdown container itself */
     flex-direction: column;
     position: absolute;
     top: 90px;
-    /* Adjusted position */
     right: 20px;
     background-color: var(--color-white);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
     overflow: hidden;
     z-index: 1000;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    max-height: 0;
+    transform: translateY(-15px);
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        max-height 0.5s ease-out;
+    pointer-events: none;
+    width: calc(100% - 40px);
+    left: 20px;
 }
 
 [data-theme='dark'] .dropdownMenu {
     background-color: var(--color-technologies-grey);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .dropdownMenu.open {
     display: flex;
     opacity: 1;
+    max-height: 400px;
     transform: translateY(0);
+    padding: 10px 0;
+    pointer-events: auto;
 }
 
 .dropdownLink {
-    /* Used for links inside the responsive dropdown */
+    /* Styled to mimic .dropdownButton for mobile menu consistency */
     background-color: transparent;
     border: none;
+    /* Removed border-bottom */
     padding: 12px 20px;
+    /* Consistent padding with dropdownButton */
     text-align: left;
     cursor: pointer;
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
+    /* Consistent color */
     font-size: 1em;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    /* Space between icon and text */
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    gap: 12px;
+    /* Consistent gap with dropdownButton */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-out;
+    /* Added transform transition */
+    border-radius: 8px;
+    /* Consistent border-radius */
+    margin: 8px 12px;
+    /* Consistent margin */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Consistent subtle shadow */
 }
 
 .dropdownLink:hover {
     background-color: var(--color-greenlime-light);
     color: var(--color-white);
+    transform: translateX(5px);
+    /* Consistent slide effect on hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    /* Consistent shadow on hover */
 }
 
 [data-theme='dark'] .dropdownLink {
@@ -383,6 +433,8 @@
 
 [data-theme='dark'] .dropdownLink:hover {
     background-color: var(--color-greenlime-dark);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    /* Consistent dark mode shadow on hover */
 }
 
 
@@ -393,11 +445,11 @@
     }
 
     .sandwichMenu {
-        display: block;
+        display: flex;
     }
 
     .settingsToggle {
-        display: block;
+        display: flex;
     }
 }
 
@@ -407,8 +459,29 @@
         padding: 10px 20px;
     }
 
-    .settingsDropdown,
+    .settingsDropdown {
+        top: 70px;
+        right: 15px;
+        min-width: 180px;
+    }
+
+    .dropdownButton {
+        padding: 10px 15px;
+        margin: 6px 8px;
+    }
+
     .dropdownMenu {
         top: 70px;
         right: 15px;
-    } }
+        left: 15px;
+        width: calc(100% - 30px);
+    }
+
+    .dropdownLink {
+        /* Adjust for smaller screens as needed, maintaining consistency with dropdownButton */
+        padding: 10px 15px;
+        /* Matched smaller screen padding of dropdownButton */
+        margin: 6px 8px;
+        /* Matched smaller screen margin of dropdownButton */
+    }
+}
