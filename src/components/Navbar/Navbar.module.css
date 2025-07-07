@@ -5,25 +5,26 @@
     padding: 15px 30px;
     margin: 20px;
     /* Margin from top and sides */
-    border-radius: 15px;
-    /* More rounded corners */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    /* Slightly stronger shadow */
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-    /* Smoother transitions */
+    border-radius: 20px;
+    /* Even more rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Stronger, softer shadow */
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        /* Custom bezier curve for smoother transition */
+        box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.3s ease-out;
     position: sticky;
-    /* Make it sticky for "scrolling with the page" */
     top: 20px;
-    /* Aligns with margin, adjusts as you scroll */
     z-index: 1000;
-    /* Ensure it stays on top */
+    transform: translateY(0);
+    /* Initial state for potential scroll effects */
 }
 
 /* Dark mode styles for navbar */
 [data-theme='dark'] .navbar {
     background-color: var(--color-technologies-grey);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-    /* Stronger shadow for dark mode */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    /* Deeper shadow for dark mode */
 }
 
 .navbarContainer {
@@ -35,54 +36,64 @@
 .logoContainer {
     display: flex;
     align-items: center;
+    position: relative;
+    /* For potential pseudo-elements or more complex effects */
 }
 
 .logo {
-    height: 50px;
-    /* Adjust as needed */
-    border-radius: 8px;
-    /* Rounded corners for logo */
+    height: 55px;
+    /* Slightly larger logo */
+    border-radius: 12px;
+    /* More rounded corners for logo */
     overflow: hidden;
-    /* Clip any potential overflow from rounded corners */
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow on logo */
 }
 
 .logo:hover {
-    transform: scale(1.08);
-    /* Slightly more pronounced scaling */
+    transform: scale(1.1);
+    /* More pronounced scaling on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navLinks {
     display: flex;
-    gap: 25px;
-    /* Space between links */
+    gap: 30px;
+    /* Increased space between links */
 }
 
 .navLink {
     text-decoration: none;
     color: var(--color-technologies-grey);
     font-family: 'Montserrat Regular', sans-serif;
-    font-size: 1.1em;
+    font-size: 1.15em;
+    /* Slightly larger font size */
+    font-weight: 500;
+    /* Medium weight for better readability */
     position: relative;
     display: flex;
-    /* Allow icon and text to sit side-by-side */
     align-items: center;
-    padding: 8px 15px;
-    /* Add some padding to the link area */
-    border-radius: 8px;
-    /* Rounded corners for nav links */
-    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
-    /* Smoother transitions */
+    padding: 10px 18px;
+    /* More padding for a bolder button feel */
+    border-radius: 10px;
+    /* More rounded corners for nav links */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    /* Ensure hover effects are contained */
+    z-index: 1;
+    /* Ensure text is above background pseudo-elements */
 }
 
-.navIcon {
-    margin-right: 8px;
-    /* Space between icon and text */
-    font-size: 1.2em;
-    /* Adjust icon size */
-    transition: color 0.3s ease-in-out;
+.navLink .navIcon {
+    margin-right: 10px;
+    /* More space between icon and text */
+    font-size: 1.3em;
+    /* Larger icon size */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-out;
 }
 
+/* Background hover effect */
 .navLink::before {
     content: '';
     position: absolute;
@@ -90,76 +101,102 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: transparent;
+    background-color: var(--color-greenlime-light);
+    /* Use a corporate color for hover */
     border-radius: inherit;
-    /* Inherit rounded corners */
-    transition: background-color 0.3s ease-in-out;
+    transform: scaleX(0);
+    /* Start hidden */
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Smoother expansion */
     z-index: -1;
-    /* Place behind text and icon */
 }
 
 .navLink:hover::before {
-    background-color: rgba(0, 0, 0, 0.05);
-    /* Subtle hover background */
-}
-
-[data-theme='dark'] .navLink:hover::before {
-    background-color: rgba(255, 255, 255, 0.05);
-    /* Subtle dark mode hover */
+    transform: scaleX(1);
+    /* Expand on hover */
 }
 
 .navLink:hover {
-    color: var(--color-greenlime-dark);
-    transform: translateY(-2px);
+    color: var(--color-white);
+    /* Text color changes to white on hover */
+    transform: translateY(-3px);
+    /* More pronounced lift effect */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow on hover */
 }
 
 .navLink:hover .navIcon {
-    color: var(--color-greenlime-dark);
+    color: var(--color-white);
+    /* Icon color changes to white on hover */
+    transform: scale(1.05);
+    /* Icon scales slightly */
 }
 
-/* Dark mode styles for nav links */
+/* Dark mode specific for nav links */
 [data-theme='dark'] .navLink {
     color: var(--color-white);
 }
 
+[data-theme='dark'] .navLink::before {
+    background-color: var(--color-greenlime-dark);
+    /* Darker green for dark mode hover */
+}
+
 [data-theme='dark'] .navLink:hover {
-    color: var(--color-greenlime-light);
+    color: var(--color-white);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme='dark'] .navLink:hover .navIcon {
-    color: var(--color-greenlime-light);
+    color: var(--color-white);
 }
 
 .rightSection {
     display: flex;
     align-items: center;
-    gap: 20px;
-    /* Space between settings and sandwich menu */
+    gap: 25px;
+    /* More space in right section */
 }
 
 .settingsToggle {
     position: relative;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
+    /* Slightly larger clickable area */
     border-radius: 50%;
-    /* Make it circular */
-    transition: background-color 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.03);
+    /* Very light default background */
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Very subtle initial shadow */
 }
 
 .settingsToggle:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-    /* Slightly darker hover */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* More visible hover background */
+    transform: scale(1.05);
+    /* Slight scale on hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='dark'] .settingsToggle {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.08);
 }
 
 [data-theme='dark'] .settingsToggle:hover {
     background-color: rgba(255, 255, 255, 0.15);
-    /* Slightly lighter dark mode hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .cogIcon {
-    font-size: 1.8em;
+    font-size: 2em;
+    /* Larger cog icon */
     color: var(--color-technologies-grey);
-    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        /* Spring-like rotation */
+        color 0.3s ease-in-out;
 }
 
 [data-theme='dark'] .cogIcon {
@@ -167,35 +204,37 @@
 }
 
 .settingsToggle:hover .cogIcon {
-    transform: rotate(90deg);
-    /* Spin effect on hover */
+    transform: rotate(120deg);
+    /* More rotation on hover */
 }
 
 .settingsDropdown {
     display: none;
-    /* Hidden by default */
     flex-direction: column;
     position: absolute;
-    top: 60px;
-    /* Position below the cog icon */
+    top: 70px;
+    /* Adjusted position below larger cog icon */
     right: 0;
     background-color: var(--color-white);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    /* Deeper shadow for dropdown */
+    border-radius: 12px;
+    /* More rounded corners */
     overflow: hidden;
     z-index: 1000;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    min-width: 200px;
-    /* Ensure enough space for text and icon */
-    padding: 8px 0;
-    /* Add some padding around the buttons */
+    transform: translateY(-15px);
+    /* More pronounced initial translateY */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    min-width: 220px;
+    /* Wider dropdown */
+    padding: 10px 0;
+    /* Increased vertical padding */
 }
 
 [data-theme='dark'] .settingsDropdown {
     background-color: var(--color-technologies-grey);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .settingsDropdown.open {
@@ -207,56 +246,67 @@
 .dropdownButton {
     background-color: transparent;
     border: none;
-    padding: 10px 20px;
-    /* Slightly reduced vertical padding */
+    padding: 12px 20px;
+    /* Increased padding */
     text-align: left;
     cursor: pointer;
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
     font-size: 1em;
     display: flex;
-    /* Align icon and text */
     align-items: center;
-    gap: 10px;
-    /* Space between icon and text in dropdown */
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    border-radius: 5px;
-    /* Rounded corners for dropdown buttons */
-    margin: 5px 10px;
-    /* Add some margin for spacing between buttons */
+    gap: 12px;
+    /* More space between icon and text */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-out;
+    border-radius: 8px;
+    /* More rounded corners for dropdown buttons */
+    margin: 6px 12px;
+    /* Increased margin for spacing */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow on buttons */
 }
 
 .dropdownButton:hover {
     background-color: var(--color-greenlime-light);
     color: var(--color-white);
+    transform: translateX(5px);
+    /* Slide effect on hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='dark'] .dropdownButton {
     color: var(--color-white);
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.08);
 }
 
 [data-theme='dark'] .dropdownButton:hover {
     background-color: var(--color-greenlime-dark);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .buttonIcon {
-    font-size: 1.1em;
+    font-size: 1.2em;
+    /* Larger button icons */
+    transition: color 0.3s ease-in-out;
 }
-
 
 /* Sandwich Menu */
 .sandwichMenu {
     display: none;
-    /* Hidden by default, shown on smaller screens */
     cursor: pointer;
     padding: 10px;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
+    width: 30px;
+    /* Slightly wider bars */
+    height: 4px;
+    /* Slightly thicker bars */
     background-color: var(--color-technologies-grey);
-    margin: 5px 0;
+    margin: 6px 0;
+    /* More space between bars */
+    border-radius: 2px;
+    /* Rounded ends for bars */
     transition: all 0.3s ease-in-out;
 }
 
@@ -264,15 +314,26 @@
     background-color: var(--color-white);
 }
 
+/* Animation for opening/closing sandwich menu */
+.sandwichMenu.open .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.sandwichMenu.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.sandwichMenu.open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
 .dropdownMenu {
     display: none;
-    /* Hidden by default */
     flex-direction: column;
     position: absolute;
     top: 90px;
-    /* Adjust based on navbar height and margin */
+    /* Adjusted position */
     right: 20px;
-    /* Align with navbar margin */
     background-color: var(--color-white);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
@@ -306,6 +367,8 @@
     text-decoration: none;
     display: flex;
     align-items: center;
+    gap: 10px;
+    /* Space between icon and text */
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -325,20 +388,15 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
-
-    /* Adjust breakpoint for tablets/smaller desktops */
     .navLinks {
         display: none;
-        /* Hide regular links on smaller screens */
     }
 
     .sandwichMenu {
         display: block;
-        /* Show sandwich menu icon */
     }
 
     .settingsToggle {
-        /* Keep settings toggle visible */
         display: block;
     }
 }
@@ -346,13 +404,11 @@
 @media (max-width: 768px) {
     .navbar {
         margin: 15px;
-        /* Slightly less margin on smaller screens */
         padding: 10px 20px;
     }
 
     .settingsDropdown,
     .dropdownMenu {
         top: 70px;
-        /* Adjust dropdown position for smaller navbar height */
         right: 15px;
     } }

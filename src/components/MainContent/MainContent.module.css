@@ -1,9 +1,10 @@
 /* src/components/MainContent/MainContent.module.css */
 .mainContent {
-    padding: 20px;
+    padding: 30px;
+    /* Increased padding */
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
-    transition: color 0.5s ease;
+    transition: color 0.4s ease-in-out;
 }
 
 [data-theme='dark'] .mainContent {
@@ -11,61 +12,98 @@
 }
 
 .section {
-    min-height: 80vh;
-    /* Make sections take up most of the viewport height */
+    min-height: 70vh;
+    /* Keep this general min-height, will adjust contact specific below */
+    height: auto;
+    /* Allow height to adapt to content */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 40px;
+    /* More generous padding */
     margin-bottom: 50px;
     background-color: var(--color-white);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+    border-radius: 20px;
+    /* Consistent rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    /* Stronger, softer shadow */
+    transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.5s ease-out;
     opacity: 0;
     /* For scroll animation */
-    transform: translateY(20px);
+    transform: translateY(30px);
     /* For scroll animation */
-    animation: fadeInOnScroll 1s forwards;
-    /* Example animation */
+    animation: fadeInOnLoad 1s forwards;
+    /* Use a different animation name if needed */
+    position: relative;
+    /* For z-index and potential overlay effects */
+    overflow: hidden;
+    /* Ensure content stays within rounded borders */
 }
 
-[data-theme='dark'] .section {
-    background-color: var(--color-technologies-grey);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* Specific adjustment for the contact section to make it smaller */
+#contact {
+    min-height: auto;
+    /* Override general min-height for contact section */
+    padding: 40px 20px;
+    /* Adjust padding for a more compact look */
 }
 
-@keyframes fadeInOnScroll {
+
+/* Animation for sections on load */
+@keyframes fadeInOnLoad {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+/* Intersection Observer would typically trigger this for scroll effects */
+/* Example class to be added by JS when section is in view */
+.section.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+[data-theme='dark'] .section {
+    background-color: var(--color-technologies-grey);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Deeper shadow for dark mode */
+}
+
+/* Alternating background colors for sections */
 .section:nth-child(even) {
     background-color: var(--color-greenlime-light);
     color: var(--color-white);
+    /* Text white on light green */
 }
 
 [data-theme='dark'] .section:nth-child(even) {
     background-color: var(--color-greenlime-dark);
+    /* Darker green for dark mode even sections */
 }
 
 .sectionTitle {
-    font-size: 2.8em;
-    margin-bottom: 20px;
+    font-size: 3.2em;
+    /* Larger section titles */
+    margin-bottom: 25px;
     color: var(--color-greenlime-dark);
-    transition: color 0.5s ease;
+    /* Default title color */
+    transition: color 0.4s ease-in-out;
 }
 
 [data-theme='dark'] .sectionTitle {
     color: var(--color-greenlime-light);
+    /* Lighter green in dark mode */
 }
 
 .section:nth-child(even) .sectionTitle {
     color: var(--color-white);
+    /* White titles on even sections */
 }
 
 [data-theme='dark'] .section:nth-child(even) .sectionTitle {
@@ -73,102 +111,192 @@
 }
 
 .sectionText {
-    font-size: 1.2em;
-    line-height: 1.6;
-    max-width: 800px;
-    margin-bottom: 30px;
+    font-size: 1.25em;
+    /* Slightly larger text */
+    line-height: 1.7;
+    /* Increased line height for readability */
+    max-width: 900px;
+    /* Wider text block */
+    margin-bottom: 40px;
+    color: inherit;
+    /* Inherit color from section for consistency */
 }
 
 .callToAction,
 .submitButton {
     background-color: var(--color-greenlime-dark);
     color: var(--color-white);
-    padding: 15px 30px;
+    padding: 18px 35px;
+    /* More padding for a bigger button */
     border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
+    border-radius: 10px;
+    /* More rounded corners */
+    font-size: 1.2em;
+    /* Larger font size */
+    font-weight: 600;
+    /* Bolder text */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    /* Subtle shadow */
 }
 
 .callToAction:hover,
 .submitButton:hover {
     background-color: var(--color-greenlime-light);
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.02);
+    /* More lift and slight scale */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    /* More pronounced shadow on hover */
 }
 
 [data-theme='dark'] .callToAction,
 [data-theme='dark'] .submitButton {
     background-color: var(--color-greenlime-light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme='dark'] .callToAction:hover,
 [data-theme='dark'] .submitButton:hover {
     background-color: var(--color-greenlime-dark);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+
+/* Style for buttons within an 'even' section */
+.section:nth-child(even) .callToAction,
+.section:nth-child(even) .submitButton {
+    background-color: var(--color-white);
+    /* White background on even sections */
+    color: var(--color-greenlime-dark);
+    /* Dark green text on white button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section:nth-child(even) .callToAction:hover,
+.section:nth-child(even) .submitButton:hover {
+    background-color: var(--color-complementary-yellow);
+    /* Yellow on hover for even section buttons */
+    color: var(--color-white);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode for buttons within an 'even' section */
+[data-theme='dark'] .section:nth-child(even) .callToAction,
+[data-theme='dark'] .section:nth-child(even) .submitButton {
+    background-color: var(--color-complementary-teal);
+    /* Teal for dark mode even section buttons */
+    color: var(--color-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .section:nth-child(even) .callToAction:hover,
+[data-theme='dark'] .section:nth-child(even) .submitButton:hover {
+    background-color: var(--color-complementary-brown);
+    /* Brown on hover for dark mode even section buttons */
+    color: var(--color-white);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
 
 .serviceGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Larger min width for services */
+    gap: 40px;
+    /* Increased gap */
     width: 100%;
     max-width: 1200px;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .serviceItem {
     background-color: var(--color-white);
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    padding: 30px;
+    /* More padding */
+    border-radius: 15px;
+    /* More rounded */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* Softer shadow */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        /* Spring-like transform */
+        box-shadow 0.4s ease-in-out,
+        background-color 0.4s ease-in-out;
+    cursor: pointer;
+    /* Indicate interactivity */
 }
 
 [data-theme='dark'] .serviceItem {
     background-color: #333;
-    /* Slightly lighter dark for items */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Darker background for items */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 .serviceItem:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    /* More pronounced lift and slight scale */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow on hover */
 }
 
 [data-theme='dark'] .serviceItem:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
 }
 
 .serviceItem h3 {
     color: var(--color-greenlime-dark);
-    margin-bottom: 10px;
-    font-size: 1.5em;
-    transition: color 0.3s ease;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    /* Larger service titles */
+    transition: color 0.4s ease-in-out;
 }
 
 [data-theme='dark'] .serviceItem h3 {
     color: var(--color-greenlime-light);
 }
 
+.serviceItem p {
+    font-size: 1.05em;
+    /* Slightly larger service text */
+    line-height: 1.6;
+}
+
+/* Contact Form Specific Styles */
 .contactForm {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+    /* More space between form elements */
     width: 100%;
-    max-width: 500px;
-    margin-top: 30px;
+    max-width: 600px;
+    /* Wider form */
+    margin-top: 40px;
+}
+
+.inputGroup {
+    position: relative;
+    /* For icon positioning */
+    width: 100%;
 }
 
 .inputField,
 .textareaField {
-    padding: 12px 15px;
-    border: 1px solid var(--color-complementary-teal);
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 15px 20px 15px 50px;
+    /* More padding, extra space for icon */
+    border: 2px solid var(--color-complementary-teal);
+    /* Thicker border */
+    border-radius: 8px;
+    /* More rounded */
+    font-size: 1.05em;
+    /* Slightly larger font */
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
     background-color: var(--color-white);
-    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Inner shadow */
+    width: calc(100% - 70px);
+    /* Adjust width considering padding and icon space */
 }
 
 [data-theme='dark'] .inputField,
@@ -176,37 +304,142 @@
     background-color: var(--color-dark-background);
     color: var(--color-white);
     border-color: var(--color-greenlime-dark);
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 .inputField:focus,
 .textareaField:focus {
     outline: none;
     border-color: var(--color-greenlime-dark);
-    box-shadow: 0 0 0 2px rgba(95, 165, 144, 0.2);
+    box-shadow: 0 0 0 3px rgba(95, 165, 144, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Outer glow on focus */
 }
 
 [data-theme='dark'] .inputField:focus,
 [data-theme='dark'] .textareaField:focus {
     border-color: var(--color-greenlime-light);
-    box-shadow: 0 0 0 2px rgba(203, 212, 110, 0.3);
+    box-shadow: 0 0 0 3px rgba(203, 212, 110, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.15);
 }
+
+.inputIcon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-complementary-teal);
+    font-size: 1.2em;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Adjust icon position for textarea - PENCIL ICON FIX */
+.inputGroup textarea+.inputIcon {
+    top: 20px;
+    /* Adjusted to be higher, relative to top of textarea padding */
+    transform: translateY(0);
+    /* Remove vertical centering as it's top-aligned */
+}
+
+
+.inputField:focus+.inputIcon,
+.textareaField:focus+.inputIcon {
+    color: var(--color-greenlime-dark);
+    /* Icon color changes on focus */
+}
+
+[data-theme='dark'] .inputIcon {
+    color: var(--color-greenlime-dark);
+}
+
+[data-theme='dark'] .inputField:focus+.inputIcon,
+[data-theme='dark'] .textareaField:focus+.inputIcon {
+    color: var(--color-greenlime-light);
+}
+
 
 .textareaField {
     resize: vertical;
-    min-height: 120px;
+    min-height: 150px;
+    /* Taller textarea */
+    padding-top: 15px;
+    /* Adjust padding due to icon */
+    padding-bottom: 15px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .sectionTitle {
-        font-size: 2em;
+        font-size: 2.8em;
+    }
+
+    .sectionText {
+        font-size: 1.1em;
+    }
+
+    .serviceGrid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    #contact {
+        padding: 30px 15px;
+        /* Smaller padding for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .mainContent {
+        padding: 20px;
+    }
+
+    .section {
+        padding: 40px 20px;
+        margin-bottom: 30px;
+    }
+
+    .sectionTitle {
+        font-size: 2.2em;
     }
 
     .sectionText {
         font-size: 1em;
     }
 
+    .callToAction,
+    .submitButton {
+        padding: 15px 25px;
+        font-size: 1.1em;
+    }
+
     .serviceGrid {
         grid-template-columns: 1fr;
         /* Stack services on small screens */
+        gap: 25px;
+    }
+
+    .serviceItem {
+        padding: 20px;
+    }
+
+    .serviceItem h3 {
+        font-size: 1.6em;
+    }
+
+    .contactForm {
+        gap: 15px;
+    }
+
+    .inputField,
+    .textareaField {
+        padding: 10px 15px 10px 45px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .inputIcon {
+        left: 10px;
+        font-size: 1.1em;
+    }
+
+    /* Responsive adjustment for textarea icon */
+    .inputGroup textarea+.inputIcon {
+        top: 15px;
+        /* Adjust top for smaller screens */
     } }

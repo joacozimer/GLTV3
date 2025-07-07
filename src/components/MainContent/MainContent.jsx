@@ -1,56 +1,66 @@
 // src/components/MainContent/MainContent.jsx
 import React from 'react';
 import styles from './MainContent.module.css';
+// Import new icons for the form
+import { FaUserAlt, FaEnvelope, FaPen } from 'react-icons/fa';
 
-const MainContent = () => {
+
+// Recibe props de App.js
+const MainContent = ({ getTranslatedText }) => {
     return (
         <main className={styles.mainContent}>
             <section id="home" className={styles.section}>
-                <h1 className={styles.sectionTitle}>Welcome to GreenLime Technologies</h1>
+                <h1 className={styles.sectionTitle}>{getTranslatedText('welcomeTitle')}</h1>
                 <p className={styles.sectionText}>
-                    Your trusted partner for microcode and firmware updates.
-                    We streamline complex tasks, making technology work seamlessly for you.
+                    {getTranslatedText('welcomeText')}
                 </p>
-                <button className={styles.callToAction}>Learn More</button>
+                <button className={styles.callToAction}>{getTranslatedText('learnMore')}</button>
             </section>
 
             <section id="services" className={styles.section}>
-                <h2 className={styles.sectionTitle}>Our Services</h2>
+                <h2 className={styles.sectionTitle}>{getTranslatedText('ourServices')}</h2>
                 <div className={styles.serviceGrid}>
                     <div className={styles.serviceItem}>
-                        <h3>Microcode Updates</h3>
-                        <p>Keeping your systems optimized and secure with the latest microcode.</p>
+                        <h3>{getTranslatedText('microcodeUpdatesTitle')}</h3>
+                        <p>{getTranslatedText('microcodeUpdatesText')}</p>
                     </div>
                     <div className={styles.serviceItem}>
-                        <h3>Firmware Management</h3>
-                        <p>Efficiently managing and deploying firmware across your infrastructure.</p>
+                        <h3>{getTranslatedText('firmwareManagementTitle')}</h3>
+                        <p>{getTranslatedText('firmwareManagementText')}</p>
                     </div>
                     <div className={styles.serviceItem}>
-                        <h3>Automated Solutions</h3>
-                        <p>Automating your update processes for agility and effectiveness.</p>
+                        <h3>{getTranslatedText('automatedSolutionsTitle')}</h3>
+                        <p>{getTranslatedText('automatedSolutionsText')}</p>
                     </div>
                 </div>
             </section>
 
             <section id="about" className={styles.section}>
-                <h2 className={styles.sectionTitle}>About Us</h2>
+                <h2 className={styles.sectionTitle}>{getTranslatedText('aboutUsTitle')}</h2>
                 <p className={styles.sectionText}>
-                    "Green Lime Technologies" is a technology company that provides services to other companies in the same field.
-                    Our goal is to solve the most cumbersome tasks for technology companies in an agile and effective way.
-                    We target business audiences, specifically managers in technology companies, aged 35 to 45, who are professionals or have a high cultural level.
+                    {getTranslatedText('aboutUsText')}
                 </p>
             </section>
 
             <section id="contact" className={styles.section}>
-                <h2 className={styles.sectionTitle}>Contact Us</h2>
+                <h2 className={styles.sectionTitle}>{getTranslatedText('contactUsTitle')}</h2>
                 <p className={styles.sectionText}>
-                    Reach out to us for a personalized solution tailored to your needs.
+                    {getTranslatedText('contactUsText')}
                 </p>
                 <form className={styles.contactForm}>
-                    <input type="text" placeholder="Your Name" className={styles.inputField} />
-                    <input type="email" placeholder="Your Email" className={styles.inputField} />
-                    <textarea placeholder="Your Message" className={styles.textareaField}></textarea>
-                    <button type="submit" className={styles.submitButton}>Send Message</button>
+                    <div className={styles.inputGroup}>
+                        <FaUserAlt className={styles.inputIcon} />
+                        <input type="text" placeholder={getTranslatedText('yourName')} className={styles.inputField} />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <FaEnvelope className={styles.inputIcon} />
+                        <input type="email" placeholder={getTranslatedText('yourEmail')} className={styles.inputField} />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <FaPen className={styles.inputIcon} />
+                        <textarea placeholder={getTranslatedText('yourMessage')} className={styles.textareaField}></textarea>
+                    </div>
+                    <button type="submit" className={styles.submitButton}>{getTranslatedText('sendMessage')}</button>
                 </form>
             </section>
         </main>

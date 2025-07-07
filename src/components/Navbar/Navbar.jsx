@@ -1,5 +1,5 @@
 // src/components/Navbar/Navbar.jsx
-import React, { useState, useEffect } from 'react';
+import React from 'react'; // No need for useState, useEffect locally anymore
 import styles from './Navbar.module.css';
 import whiteLogo from '../../assets/images/GreenLimeWhiteBackground.jpg';
 import greyLogo from '../../assets/images/GreenLimeGreyBackground.jpg';
@@ -7,22 +7,19 @@ import greyLogo from '../../assets/images/GreenLimeGreyBackground.jpg';
 // Import icons
 import { FaHome, FaConciergeBell, FaInfoCircle, FaEnvelope, FaUsers, FaCog, FaMoon, FaSun, FaGlobe, FaUser } from 'react-icons/fa';
 
-const Navbar = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    const [language, setLanguage] = useState('es'); // 'es' for Spanish, 'en' for English
+// Recibe props de App.js
+const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslatedText }) => {
 
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-        }
-    }, [isDarkMode]);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Keep local state for menu
+    const [isSettingsOpen, setIsSettingsOpen] = React.useState(false); // Keep local state for settings
+
+    // useEffect para el modo oscuro se mantiene aquí si solo afecta a este componente,
+    // pero ya está centralizado en App.js para el 'data-theme' del documento.
+    // Si el Navbar necesita reaccionar de forma específica, se puede mantener.
+    // En este caso, isDarkMode ya viene como prop, así que no es necesario un useEffect aquí.
 
     const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
+        setIsDarkMode(!isDarkMode); // Llama a la función de App.js
     };
 
     const toggleMenu = () => {
@@ -36,38 +33,7 @@ const Navbar = () => {
     };
 
     const toggleLanguage = () => {
-        setLanguage(prevLang => (prevLang === 'es' ? 'en' : 'es'));
-        // In a real app, you'd likely use a context or i18n library to change content
-    };
-
-    const getTranslatedText = (key) => {
-        const translations = {
-            es: {
-                home: 'Inicio',
-                services: 'Servicios',
-                about: 'Nosotros',
-                contact: 'Contacto',
-                community: 'Comunidad',
-                darkMode: 'Modo Oscuro',
-                lightMode: 'Modo Claro',
-                employeeLogin: 'Soy Empleado',
-                language: 'Idioma',
-                settings: 'Ajustes'
-            },
-            en: {
-                home: 'Home',
-                services: 'Services',
-                about: 'About Us',
-                contact: 'Contact',
-                community: 'Community',
-                darkMode: 'Dark Mode',
-                lightMode: 'Light Mode',
-                employeeLogin: 'Employee Login',
-                language: 'Language',
-                settings: 'Settings'
-            }
-        };
-        return translations[language][key] || key;
+        setLanguage(prevLang => (prevLang === 'es' ? 'en' : 'es')); // Llama a la función de App.js
     };
 
     return (
@@ -85,7 +51,7 @@ const Navbar = () => {
                     <a href="#home" className={styles.navLink}><FaHome className={styles.navIcon} /> {getTranslatedText('home')}</a>
                     <a href="#services" className={styles.navLink}><FaConciergeBell className={styles.navIcon} /> {getTranslatedText('services')}</a>
                     <a href="#about" className={styles.navLink}><FaInfoCircle className={styles.navIcon} /> {getTranslatedText('about')}</a>
-                    <a href="#community" className={styles.navLink}><FaUsers className={styles.navIcon} /> {getTranslatedText('community')}</a> {/* New Community button */}
+                    <a href="#community" className={styles.navLink}><FaUsers className={styles.navIcon} /> {getTranslatedText('community')}</a>
                     <a href="#contact" className={styles.navLink}><FaEnvelope className={styles.navIcon} /> {getTranslatedText('contact')}</a>
                 </div>
 

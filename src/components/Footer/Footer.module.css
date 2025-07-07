@@ -1,39 +1,99 @@
 /* src/components/Footer/Footer.module.css */
 .footer {
     background-color: var(--color-technologies-grey);
-    /* Using a corporate color for footer */
     color: var(--color-white);
-    padding: 30px 20px;
+    padding: 40px 30px;
+    /* More padding for a more substantial footer */
     text-align: center;
     font-family: 'Montserrat Regular', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+    border-top-left-radius: 20px;
+    /* Rounded top corners */
+    border-top-right-radius: 20px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+    /* Shadow subtly lifting from bottom */
 }
 
 [data-theme='dark'] .footer {
-    background-color: #333;
+    background-color: #222;
     /* A slightly different dark shade for footer */
     color: var(--color-white);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .footerContent {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    /* Space out copyright, social, and links */
     align-items: center;
-    gap: 15px;
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
+    gap: 20px;
+    /* Space between elements */
 }
+
+.footerContent p {
+    margin: 0;
+    /* Remove default paragraph margin */
+    font-size: 1em;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 20px;
+    /* Space between social icons */
+}
+
+.socialLink {
+    color: var(--color-white);
+    font-size: 1.8em;
+    /* Size of social icons */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.socialLink:hover {
+    color: var(--color-greenlime-light);
+    /* Hover color for social icons */
+    transform: translateY(-3px) scale(1.1);
+    /* Lift and scale effect */
+}
+
+[data-theme='dark'] .socialLink:hover {
+    color: var(--color-greenlime-dark);
+    /* Darker green hover for dark mode */
+}
+
 
 .footerLinks {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    /* More space between links */
 }
 
 .footerLink {
     color: var(--color-white);
     text-decoration: none;
-    font-size: 0.95em;
-    transition: color 0.3s ease, transform 0.2s ease;
+    font-size: 0.98em;
+    /* Slightly larger link text */
+    position: relative;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-out;
+    padding: 5px 0;
+    /* Add padding for hover effect */
+}
+
+.footerLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-greenlime-light);
+    /* Underline color */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
 }
 
 .footerLink:hover {
@@ -41,14 +101,34 @@
     transform: translateY(-2px);
 }
 
+.footerLink:hover::after {
+    width: 100%;
+    /* Expand underline on hover */
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .footerContent {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+        /* More gap when stacked */
+    }
+
+    .socialIcons {
+        margin-top: 10px;
+        /* Space above social icons when stacked */
+        margin-bottom: 10px;
     }
 
     .footerLinks {
         flex-direction: column;
         gap: 10px;
+        align-items: center;
+        /* Center links when stacked */
+    }
+
+    .footerLink::after {
+        left: 0;
+        /* Adjust underline origin for stacked links */
+        transform: translateX(0);
     } }
