@@ -7,8 +7,8 @@ import greyLogo from '../../assets/images/GreenLimeGreyBackground.jpg';
 // Import icons
 import { FaHome, FaConciergeBell, FaInfoCircle, FaEnvelope, FaUsers, FaCog, FaMoon, FaSun, FaGlobe, FaUser } from 'react-icons/fa';
 
-// Recibe props de App.js
-const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslatedText }) => {
+// Recibe props de App.js, incluyendo currentPage y setCurrentPage
+const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslatedText, setCurrentPage }) => {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Keep local state for menu
     const [isSettingsOpen, setIsSettingsOpen] = React.useState(false); // Keep local state for settings
@@ -29,6 +29,13 @@ const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslate
 
     const toggleLanguage = () => {
         setLanguage(prevLang => (prevLang === 'es' ? 'en' : 'es')); // Llama a la función de App.js
+    };
+
+    // Nueva función para ir a la página de login de empleados
+    const goToEmployeeLogin = () => {
+        setCurrentPage('employeeLogin');
+        setIsSettingsOpen(false); // Cierra el menú de ajustes después de navegar
+        setIsMenuOpen(false); // Asegúrate de que el menú principal también esté cerrado
     };
 
     return (
@@ -59,7 +66,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, language, setLanguage, getTranslate
                                 {isDarkMode ? <FaSun className={styles.buttonIcon} /> : <FaMoon className={styles.buttonIcon} />}
                                 {getTranslatedText(isDarkMode ? 'lightMode' : 'darkMode')}
                             </button>
-                            <button className={styles.dropdownButton}>
+                            <button onClick={goToEmployeeLogin} className={styles.dropdownButton}> {/* MODIFICADO: Añadido onClick */}
                                 <FaUser className={styles.buttonIcon} />
                                 {getTranslatedText('employeeLogin')}
                             </button>
