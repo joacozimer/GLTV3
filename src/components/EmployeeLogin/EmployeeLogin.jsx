@@ -1,16 +1,14 @@
 // src/components/EmployeeLogin/EmployeeLogin.jsx
 import React, { useState, useEffect } from 'react';
 import styles from './EmployeeLogin.module.css';
-import { FaUserAlt, FaEnvelope, FaLock, FaSun, FaMoon } from 'react-icons/fa';
+import { FaUserAlt, FaEnvelope, FaLock, FaSun, FaMoon } from 'react-icons/fa'; // Solo los iconos necesarios
 
-// Importa las imágenes del logo (¡Asegúrate de que estas rutas sean correctas y que los archivos existan!)
+// Importa las imágenes del logo
 import lightModeLogo from '../../assets/images/GreenLimeWhiteBackground.jpg';
-import darkModeLogo from '../../assets/images/GreenLimeGreyBackground.jpg'; // Asumiendo este nombre para la versión gris
+import darkModeLogo from '../../assets/images/GreenLimeGreyBackground.jpg';
 
-const EmployeeLogin = ({ getTranslatedText }) => {
-    // Estado local para el tema (claro/oscuro). En una aplicación real, esto vendría de un contexto global.
-    const [currentTheme, setCurrentTheme] = useState('light'); // 'light' o 'dark'
-
+// Recibe props de App.js, incluyendo isDarkMode y setIsDarkMode
+const EmployeeLogin = ({ getTranslatedText, isDarkMode, setIsDarkMode }) => {
     // Estados para los campos del formulario
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -18,106 +16,108 @@ const EmployeeLogin = ({ getTranslatedText }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    // Efecto para inicializar el tema desde el atributo data-theme del body
+    // Estado para controlar el inicio de la animación
+    const [animationStarted, setAnimationStarted] = useState(false);
+
+    // Efecto para iniciar la animación una vez que el componente se monta
     useEffect(() => {
-        const bodyTheme = document.body.getAttribute('data-theme');
-        if (bodyTheme) {
-            setCurrentTheme(bodyTheme);
-        }
+        // Medio segundo (500ms) antes de que la animación de achique y movimiento empiece
+        const timer = setTimeout(() => {
+            setAnimationStarted(true);
+        }, 500);
+        return () => clearTimeout(timer);
     }, []);
 
-    // Función para alternar el tema y actualizar el atributo data-theme en el body
-    const toggleTheme = () => {
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setCurrentTheme(newTheme);
-        document.body.setAttribute('data-theme', newTheme);
-    };
-
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        setErrorMessage(''); // Limpiar mensajes anteriores
+        setErrorMessage('');
         setSuccessMessage('');
 
-        // Validar el correo electrónico
-        if (!email.endsWith('@greenlimeth')) {
-            setErrorMessage(getTranslatedText('invalidEmailDomain')); // Por ejemplo: "El correo debe ser @greenlimeth"
+        if (email && !email.endsWith('@greenlimeth')) {
+            setErrorMessage(getTranslatedText('invalidEmailDomain'));
             return;
         }
 
-        // Aquí iría la lógica real de autenticación (ej. llamada a una API)
-        console.log('Intentando login con:', { username, email, password });
-
-        // Simulación de login exitoso
-        setSuccessMessage(getTranslatedText('loginSuccess')); // Por ejemplo: "Inicio de sesión exitoso!"
-        // Limpiar formulario
-        setUsername('');
-        setEmail('');
-        setPassword('');
+        // Aquí iría tu lógica de autenticación real
+        if (username === 'test' && password === 'password') {
+            setSuccessMessage(getTranslatedText('loginSuccess'));
+            console.log('Login exitoso!');
+        } else {
+            setErrorMessage('Credenciales incorrectas. Inténtalo de nuevo.');
+        }
     };
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode); // Llama a la función de App.js
+    };
+
+    // Determina qué logo mostrar basado en el tema actual
+    const currentLogo = isDarkMode ? darkModeLogo : lightModeLogo;
 
     return (
         <div className={styles.loginContainer}>
-            <div className={styles.themeToggle}>
-                <button onClick={toggleTheme} aria-label={getTranslatedText('toggleTheme')}>
-                    {currentTheme === 'light' ? <FaMoon /> : <FaSun />}
-                </button>
+            {/* Botón de alternar tema (este es el único que debe existir y está en la esquina superior derecha) */}
+
+            {/* Contenedor principal del contenido que se anima (logo y formulario) */}
+            <div className={`${styles.mainContentArea} ${animationStarted ? styles.animateContent : ''}`}>
+
+                {/* Contenedor del logo */}
+                <div className={styles.logoWrapper}>
+                    <img
+                        src={currentLogo}
+                        alt="GreenLime Technologies Logo"
+                        className={styles.companyLogo}
+                    />
+                </div>
+
+                {/* Formulario de login */}
+                <form className={styles.loginForm} onSubmit={handleLogin}>
+                    <h2 className={styles.loginTitle}>{getTranslatedText('employeeLoginTitle')}</h2>
+
+                    {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+                    {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+
+                    <div className={styles.inputGroup}>
+                        <FaUserAlt className={styles.inputIcon} />
+                        <input
+                            type="text"
+                            placeholder={getTranslatedText('usernamePlaceholder')}
+                            className={styles.inputField}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <FaEnvelope className={styles.inputIcon} />
+                        <input
+                            type="email"
+                            placeholder={getTranslatedText('emailPlaceholder')}
+                            className={styles.inputField}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <FaLock className={styles.inputIcon} />
+                        <input
+                            type="password"
+                            placeholder={getTranslatedText('passwordPlaceholder')}
+                            className={styles.inputField}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className={styles.loginButton}>
+                        {getTranslatedText('loginButtonText')}
+                    </button>
+                </form>
             </div>
-
-            <div className={styles.logoWrapper}>
-                {/* Logo condicional según el tema */}
-                <img
-                    src={currentTheme === 'light' ? lightModeLogo : darkModeLogo}
-                    alt="GreenLime Technologies Logo"
-                    className={styles.companyLogo}
-                />
-            </div>
-
-            <h2 className={styles.loginTitle}>{getTranslatedText('employeeLoginTitle')}</h2>
-
-            <form className={styles.loginForm} onSubmit={handleSubmit}>
-                {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-                {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
-
-                <div className={styles.inputGroup}>
-                    <FaUserAlt className={styles.inputIcon} />
-                    <input
-                        type="text"
-                        placeholder={getTranslatedText('usernamePlaceholder')}
-                        className={styles.inputField}
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className={styles.inputGroup}>
-                    <FaEnvelope className={styles.inputIcon} />
-                    <input
-                        type="email"
-                        placeholder={getTranslatedText('emailPlaceholder')}
-                        className={styles.inputField}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className={styles.inputGroup}>
-                    <FaLock className={styles.inputIcon} />
-                    <input
-                        type="password"
-                        placeholder={getTranslatedText('passwordPlaceholder')}
-                        className={styles.inputField}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <button type="submit" className={styles.loginButton}>
-                    {getTranslatedText('loginButtonText')}
-                </button>
-            </form>
         </div>
     );
 };
