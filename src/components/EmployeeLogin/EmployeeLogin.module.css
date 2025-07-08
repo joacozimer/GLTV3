@@ -1,0 +1,240 @@
+/* src/components/EmployeeLogin/EmployeeLogin.module.css */
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: var(--color-white);
+    /* Fondo claro por defecto */
+    color: var(--color-technologies-grey);
+    /* Texto oscuro por defecto */
+    font-family: 'Montserrat Regular', sans-serif;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+[data-theme='dark'] .loginContainer {
+    background-color: var(--color-dark-background);
+    /* Fondo oscuro en modo oscuro */
+    color: var(--color-white);
+    /* Texto claro en modo oscuro */
+}
+
+.themeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.themeToggle button {
+    background-color: var(--color-greenlime-light);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.themeToggle button:hover {
+    background-color: var(--color-greenlime-dark);
+    transform: scale(1.05);
+}
+
+[data-theme='dark'] .themeToggle button {
+    background-color: var(--color-greenlime-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .themeToggle button:hover {
+    background-color: var(--color-greenlime-light);
+}
+
+.logoWrapper {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.companyLogo {
+    max-width: 200px;
+    /* Ajusta el tamaño del logo según sea necesario */
+    height: auto;
+    display: block;
+    /* Para centrar la imagen */
+    margin: 0 auto;
+    transition: opacity 0.4s ease-in-out;
+    /* Transición suave al cambiar de tema */
+}
+
+.loginTitle {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: var(--color-greenlime-dark);
+    /* Color del título en modo claro */
+    transition: color 0.4s ease-in-out;
+}
+
+[data-theme='dark'] .loginTitle {
+    color: var(--color-greenlime-light);
+    /* Color del título en modo oscuro */
+}
+
+.loginForm {
+    background-color: #F8F8F8;
+    /* Fondo del formulario un blanco roto */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+[data-theme='dark'] .loginForm {
+    background-color: #2a2a2a;
+    /* Fondo más oscuro para el formulario en modo oscuro */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.inputGroup {
+    position: relative;
+    width: 100%;
+}
+
+.inputField {
+    padding: 15px 20px 15px 50px;
+    border: 2px solid var(--color-complementary-teal);
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-family: 'Montserrat Regular', sans-serif;
+    color: var(--color-technologies-grey);
+    background-color: var(--color-white);
+    width: calc(100% - 70px);
+    /* Ajusta el ancho para el padding del icono */
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .inputField {
+    background-color: var(--color-dark-background);
+    color: var(--color-white);
+    border-color: var(--color-greenlime-dark);
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: var(--color-greenlime-dark);
+    box-shadow: 0 0 0 3px rgba(95, 165, 144, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .inputField:focus {
+    border-color: var(--color-greenlime-light);
+    box-shadow: 0 0 0 3px rgba(203, 212, 110, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.15);
+}
+
+.inputIcon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-complementary-teal);
+    font-size: 1.2em;
+    transition: color 0.3s ease-in-out;
+}
+
+[data-theme='dark'] .inputIcon {
+    color: var(--color-greenlime-dark);
+}
+
+[data-theme='dark'] .inputField:focus+.inputIcon {
+    color: var(--color-greenlime-light);
+}
+
+.loginButton {
+    background-color: var(--color-greenlime-dark);
+    color: var(--color-white);
+    padding: 18px 35px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loginButton:hover {
+    background-color: var(--color-greenlime-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .loginButton {
+    background-color: var(--color-greenlime-light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .loginButton:hover {
+    background-color: var(--color-greenlime-dark);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.errorMessage {
+    color: #e74c3c;
+    /* Un rojo para mensajes de error */
+    font-size: 0.95em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.successMessage {
+    color: var(--color-greenlime-dark);
+    /* Un verde para mensajes de éxito */
+    font-size: 0.95em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .loginForm {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    .loginTitle {
+        font-size: 2em;
+    }
+
+    .inputField {
+        padding: 12px 15px 12px 45px;
+    }
+
+    .inputIcon {
+        font-size: 1em;
+        left: 10px;
+    }
+
+    .loginButton {
+        padding: 15px 25px;
+        font-size: 1.1em;
+    }
+
+    .companyLogo {
+        max-width: 150px;
+    }
+}

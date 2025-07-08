@@ -24,11 +24,12 @@
     padding: 60px 40px;
     /* More generous padding */
     margin-bottom: 50px;
-    background-color: var(--color-white);
+    background-color: #F8F8F8;
+    /* MODIFIED: Fondo blanco roto muy sutil para diferenciar en modo claro */
     border-radius: 20px;
     /* Consistent rounded corners */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    /* Stronger, softer shadow */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    /* Sombra suave para distinción */
     transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
         box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
         transform 0.5s ease-out;
@@ -143,7 +144,8 @@
 
 .callToAction:hover,
 .submitButton:hover {
-    background-color: var(--color-greenlime-light);
+    background-color: var(--color-technologies-grey);
+    /* MODIFIED: Changed hover color for better contrast in light mode */
     transform: translateY(-5px) scale(1.02);
     /* More lift and slight scale */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
@@ -442,4 +444,5 @@
     .inputGroup textarea+.inputIcon {
         top: 15px;
         /* Adjust top for smaller screens */
-    } }
+    }
+}
