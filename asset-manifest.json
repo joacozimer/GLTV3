@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/GLTV3/static/css/main.719a1b9a.css",
-    "main.js": "/GLTV3/static/js/main.2a41f89e.js",
+    "main.css": "/GLTV3/static/css/main.46a77b0d.css",
+    "main.js": "/GLTV3/static/js/main.91af0ac3.js",
     "static/media/GreenLimeWhiteBackground.jpg": "/GLTV3/static/media/GreenLimeWhiteBackground.5b7ebcace5de62956451.jpg",
     "static/media/GreenLimeGreyBackground.jpg": "/GLTV3/static/media/GreenLimeGreyBackground.b533e625c0deb4cdc5a7.jpg",
     "index.html": "/GLTV3/index.html",
-    "main.719a1b9a.css.map": "/GLTV3/static/css/main.719a1b9a.css.map",
-    "main.2a41f89e.js.map": "/GLTV3/static/js/main.2a41f89e.js.map"
+    "main.46a77b0d.css.map": "/GLTV3/static/css/main.46a77b0d.css.map",
+    "main.91af0ac3.js.map": "/GLTV3/static/js/main.91af0ac3.js.map"
   },
   "entrypoints": [
-    "static/css/main.719a1b9a.css",
-    "static/js/main.2a41f89e.js"
+    "static/css/main.46a77b0d.css",
+    "static/js/main.91af0ac3.js"
   ]
 }
