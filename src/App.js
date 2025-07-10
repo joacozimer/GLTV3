@@ -3,15 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import MainContent from './components/MainContent/MainContent';
 import Footer from './components/Footer/Footer';
-import EmployeeLogin from './components/EmployeeLogin/EmployeeLogin'; // Importa el nuevo componente
+import EmployeeLogin from './components/EmployeeLogin/EmployeeLogin';
 import './styles/colors.css';
 import './index.css';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  // Idioma por defecto en español
   const [language, setLanguage] = useState('es');
-  // Estado para controlar qué componente se muestra: 'home' o 'employeeLogin'
   const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
@@ -20,63 +18,56 @@ function App() {
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
-    // Sincroniza el atributo data-theme en el body también, para compatibilidad con EmployeeLogin
     document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
-  // Función de traducción centralizada
   const getTranslatedText = (key) => {
     const translations = {
       es: {
-        // Navbar translations
         home: 'Inicio',
-        services: 'Servicios',
-        about: 'Nosotros',
+        services: 'Nuestros Servicios',
+        about: 'Acerca de Nosotros',
         contact: 'Contacto',
         community: 'Comunidad',
         darkMode: 'Modo Oscuro',
         lightMode: 'Modo Claro',
-        employeeLogin: 'Soy Empleado', // Nueva traducción
+        employeeLogin: 'Acceso Empleados',
         language: 'Idioma',
-        settings: 'Ajustes',
+        settings: 'Configuración',
 
-        // MainContent translations
-        welcomeTitle: 'Bienvenido a GreenLime Technologies',
-        welcomeText: 'Tu socio de confianza para actualizaciones de microcódigo y firmware. Simplificamos tareas complejas, haciendo que la tecnología funcione sin problemas para ti.',
-        learnMore: 'Saber Más',
+        welcomeTitle: 'Bienvenidos a Green Lime Technologies',
+        welcomeText: 'Somos su socio de confianza para actualizaciones de microcódigo y firmware. Simplificamos tareas complejas, asegurando que la tecnología funcione sin inconvenientes para ustedes.',
+        learnMore: 'Conocer Más',
         ourServices: 'Nuestros Servicios',
         microcodeUpdatesTitle: 'Actualizaciones de Microcódigo',
-        microcodeUpdatesText: 'Manteniendo tus sistemas optimizados y seguros con el microcódigo más reciente.',
+        microcodeUpdatesText: 'Mantenemos sus sistemas optimizados y seguros con el microcódigo más reciente.',
         firmwareManagementTitle: 'Gestión de Firmware',
-        firmwareManagementText: 'Gestionando e implementando firmware de manera eficiente en toda tu infraestructura.',
+        firmwareManagementText: 'Gestionamos e implementamos firmware de manera eficiente en toda su infraestructura.',
         automatedSolutionsTitle: 'Soluciones Automatizadas',
-        automatedSolutionsText: 'Automatizando tus procesos de actualización para agilidad y eficacia.',
+        automatedSolutionsText: 'Automatizamos sus procesos de actualización para mayor agilidad y eficacia.',
         aboutUsTitle: 'Sobre Nosotros',
-        aboutUsText: '"Green Lime Technologies" es una empresa de tecnología que brinda servicios a otras empresas del mismo rubro. Nuestro objetivo es resolver las tareas más engorrosas para las empresas de tecnología de manera ágil y efectiva. Nos dirigimos a audiencias empresariales, específicamente gerentes en empresas de tecnología, de 35 a 45 años, que son profesionales o tienen un alto nivel cultural.',
-        contactUsTitle: 'Contáctanos',
-        contactUsText: 'Ponte en contacto con nosotros para una solución personalizada adaptada a tus necesidades.',
-        yourName: 'Tu Nombre',
-        yourEmail: 'Tu Email',
-        yourMessage: 'Tu Mensaje',
+        aboutUsText: '"Green Lime Technologies" es una empresa de tecnología que brinda servicios a otras empresas del mismo rubro. Nuestro objetivo es resolver las tareas más complejas para las empresas de tecnología de manera ágil y efectiva. Nos dirigimos a audiencias empresariales, específicamente a gerentes en empresas de tecnología, de 35 a 45 años, que son profesionales o poseen un alto nivel cultural.',
+        contactUsTitle: 'Contáctenos',
+        contactUsText: 'Sírvase ponerse en contacto con nosotros para una solución personalizada y adaptada a sus necesidades.',
+        yourName: 'Su Nombre',
+        yourEmail: 'Su Correo Electrónico',
+        yourMessage: 'Su Mensaje',
         sendMessage: 'Enviar Mensaje',
 
-        // Footer translations
         allRightsReserved: 'Todos los derechos reservados.',
         privacyPolicy: 'Política de Privacidad',
         termsOfService: 'Términos de Servicio',
 
-        // EmployeeLogin translations (Nuevas)
         employeeLoginTitle: 'Acceso de Empleados',
         usernamePlaceholder: 'Nombre de Usuario',
         emailPlaceholder: 'Correo Electrónico @greenlimeth',
         passwordPlaceholder: 'Contraseña',
         loginButtonText: 'Iniciar Sesión',
-        invalidEmailDomain: 'El correo debe ser del dominio @greenlimeth',
+        invalidEmailDomain: 'El correo electrónico debe ser del dominio @greenlimeth',
         loginSuccess: '¡Inicio de sesión exitoso!',
         toggleTheme: 'Alternar modo oscuro/claro',
       },
       en: {
-        // Navbar translations
         home: 'Home',
         services: 'Services',
         about: 'About Us',
@@ -84,11 +75,10 @@ function App() {
         community: 'Community',
         darkMode: 'Dark Mode',
         lightMode: 'Light Mode',
-        employeeLogin: 'Employee Login', // Nueva traducción
+        employeeLogin: 'Employee Login',
         language: 'Language',
         settings: 'Settings',
 
-        // MainContent translations
         welcomeTitle: 'Welcome to GreenLime Technologies',
         welcomeText: 'Your trusted partner for microcode and firmware updates. We streamline complex tasks, making technology work seamlessly for you.',
         learnMore: 'Learn More',
@@ -108,12 +98,10 @@ function App() {
         yourMessage: 'Your Message',
         sendMessage: 'Send Message',
 
-        // Footer translations
         allRightsReserved: 'All rights reserved.',
         privacyPolicy: 'Privacy Policy',
         termsOfService: 'Terms of Service',
 
-        // EmployeeLogin translations (Nuevas)
         employeeLoginTitle: 'Employee Access',
         usernamePlaceholder: 'Username',
         emailPlaceholder: 'Email @greenlimeth',
@@ -135,12 +123,10 @@ function App() {
         language={language}
         setLanguage={setLanguage}
         getTranslatedText={getTranslatedText}
-        // Pasamos currentPage y setCurrentPage al Navbar para la navegación
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
 
-      {/* Renderizado condicional del contenido principal o el login */}
       {currentPage === 'home' ? (
         <MainContent
           language={language}
@@ -149,12 +135,11 @@ function App() {
       ) : (
         <EmployeeLogin
           getTranslatedText={getTranslatedText}
-          isDarkMode={isDarkMode} // Pasamos el estado global del tema
-          setIsDarkMode={setIsDarkMode} // Pasamos la función para cambiar el tema global
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
         />
       )}
 
-      {/* El Footer se mantiene siempre visible */}
       <Footer
         language={language}
         getTranslatedText={getTranslatedText}

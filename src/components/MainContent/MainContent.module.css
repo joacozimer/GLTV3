@@ -1,7 +1,6 @@
 /* src/components/MainContent/MainContent.module.css */
 .mainContent {
     padding: 30px;
-    /* Increased padding */
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
     transition: color 0.4s ease-in-out;
@@ -13,46 +12,32 @@
 
 .section {
     min-height: 70vh;
-    /* Keep this general min-height, will adjust contact specific below */
     height: auto;
-    /* Allow height to adapt to content */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 60px 40px;
-    /* More generous padding */
     margin-bottom: 50px;
     background-color: #F8F8F8;
-    /* MODIFIED: Fondo blanco roto muy sutil para diferenciar en modo claro */
     border-radius: 20px;
-    /* Consistent rounded corners */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    /* Sombra suave para distinción */
     transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
         box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
         transform 0.5s ease-out;
     opacity: 0;
-    /* For scroll animation */
     transform: translateY(30px);
-    /* For scroll animation */
     animation: fadeInOnLoad 1s forwards;
-    /* Use a different animation name if needed */
     position: relative;
-    /* For z-index and potential overlay effects */
     overflow: hidden;
-    /* Ensure content stays within rounded borders */
 }
 
 /* Specific adjustment for the contact section to make it smaller */
 #contact {
     min-height: auto;
-    /* Override general min-height for contact section */
     padding: 40px 20px;
-    /* Adjust padding for a more compact look */
 }
-
 
 /* Animation for sections on load */
 @keyframes fadeInOnLoad {
@@ -62,49 +47,39 @@
     }
 }
 
-/* Intersection Observer would typically trigger this for scroll effects */
-/* Example class to be added by JS when section is in view */
 .section.is-in-view {
     opacity: 1;
     transform: translateY(0);
 }
 
-
 [data-theme='dark'] .section {
     background-color: var(--color-technologies-grey);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* Deeper shadow for dark mode */
 }
 
 /* Alternating background colors for sections */
 .section:nth-child(even) {
     background-color: var(--color-greenlime-light);
     color: var(--color-white);
-    /* Text white on light green */
 }
 
 [data-theme='dark'] .section:nth-child(even) {
     background-color: var(--color-greenlime-dark);
-    /* Darker green for dark mode even sections */
 }
 
 .sectionTitle {
     font-size: 3.2em;
-    /* Larger section titles */
     margin-bottom: 25px;
     color: var(--color-greenlime-dark);
-    /* Default title color */
     transition: color 0.4s ease-in-out;
 }
 
 [data-theme='dark'] .sectionTitle {
     color: var(--color-greenlime-light);
-    /* Lighter green in dark mode */
 }
 
 .section:nth-child(even) .sectionTitle {
     color: var(--color-white);
-    /* White titles on even sections */
 }
 
 [data-theme='dark'] .section:nth-child(even) .sectionTitle {
@@ -113,14 +88,10 @@
 
 .sectionText {
     font-size: 1.25em;
-    /* Slightly larger text */
     line-height: 1.7;
-    /* Increased line height for readability */
     max-width: 900px;
-    /* Wider text block */
     margin-bottom: 40px;
     color: inherit;
-    /* Inherit color from section for consistency */
 }
 
 .callToAction,
@@ -128,28 +99,20 @@
     background-color: var(--color-greenlime-dark);
     color: var(--color-white);
     padding: 18px 35px;
-    /* More padding for a bigger button */
     border: none;
     border-radius: 10px;
-    /* More rounded corners */
     font-size: 1.2em;
-    /* Larger font size */
     font-weight: 600;
-    /* Bolder text */
     cursor: pointer;
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    /* Subtle shadow */
 }
 
 .callToAction:hover,
 .submitButton:hover {
     background-color: var(--color-technologies-grey);
-    /* MODIFIED: Changed hover color for better contrast in light mode */
     transform: translateY(-5px) scale(1.02);
-    /* More lift and slight scale */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    /* More pronounced shadow on hover */
 }
 
 [data-theme='dark'] .callToAction,
@@ -168,16 +131,13 @@
 .section:nth-child(even) .callToAction,
 .section:nth-child(even) .submitButton {
     background-color: var(--color-white);
-    /* White background on even sections */
     color: var(--color-greenlime-dark);
-    /* Dark green text on white button */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .section:nth-child(even) .callToAction:hover,
 .section:nth-child(even) .submitButton:hover {
     background-color: var(--color-complementary-yellow);
-    /* Yellow on hover for even section buttons */
     color: var(--color-white);
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -187,7 +147,6 @@
 [data-theme='dark'] .section:nth-child(even) .callToAction,
 [data-theme='dark'] .section:nth-child(even) .submitButton {
     background-color: var(--color-complementary-teal);
-    /* Teal for dark mode even section buttons */
     color: var(--color-white);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -195,18 +154,14 @@
 [data-theme='dark'] .section:nth-child(even) .callToAction:hover,
 [data-theme='dark'] .section:nth-child(even) .submitButton:hover {
     background-color: var(--color-complementary-brown);
-    /* Brown on hover for dark mode even section buttons */
     color: var(--color-white);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
-
 .serviceGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* Larger min width for services */
     gap: 40px;
-    /* Increased gap */
     width: 100%;
     max-width: 1200px;
     margin-top: 40px;
@@ -215,30 +170,22 @@
 .serviceItem {
     background-color: var(--color-white);
     padding: 30px;
-    /* More padding */
     border-radius: 15px;
-    /* More rounded */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    /* Softer shadow */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        /* Spring-like transform */
         box-shadow 0.4s ease-in-out,
         background-color 0.4s ease-in-out;
     cursor: pointer;
-    /* Indicate interactivity */
 }
 
 [data-theme='dark'] .serviceItem {
     background-color: #333;
-    /* Darker background for items */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 .serviceItem:hover {
     transform: translateY(-8px) scale(1.02);
-    /* More pronounced lift and slight scale */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    /* Stronger shadow on hover */
 }
 
 [data-theme='dark'] .serviceItem:hover {
@@ -249,7 +196,6 @@
     color: var(--color-greenlime-dark);
     margin-bottom: 15px;
     font-size: 1.8em;
-    /* Larger service titles */
     transition: color 0.4s ease-in-out;
 }
 
@@ -259,51 +205,90 @@
 
 .serviceItem p {
     font-size: 1.05em;
-    /* Slightly larger service text */
     line-height: 1.6;
 }
 
-/* Contact Form Specific Styles */
+/* Contact Form Specific Styles - Mejorados */
 .contactForm {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 20px;
-    /* More space between form elements */
     width: 100%;
-    max-width: 600px;
-    /* Wider form */
+    max-width: 800px;
     margin-top: 40px;
+    padding: 30px;
+    background-color: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    align-items: start;
+}
+
+/* Para dos columnas en pantallas grandes */
+@media (min-width: 769px) {
+    .contactForm {
+        grid-template-columns: 1fr 1fr;
+        /* Dos columnas para inputs y textarea a la derecha */
+        grid-template-areas:
+            "name-email message"
+            "submit-button message";
+    }
+
+    .inputGroup.name {
+        grid-area: name-email;
+    }
+
+    .inputGroup.email {
+        grid-area: name-email;
+    }
+
+    .inputGroup.message {
+        grid-area: message;
+    }
+
+    .submitButton {
+        grid-area: submit-button;
+    }
+
+    /* Ajuste para agrupar nombre y email verticalmente en la primera columna */
+    .nameEmailGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        /* Mismo gap que el formulario principal */
+    }
+}
+
+[data-theme='dark'] .contactForm {
+    background-color: #333;
+    /* Fondo oscuro para el formulario en dark mode */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .inputGroup {
     position: relative;
-    /* For icon positioning */
     width: 100%;
 }
 
 .inputField,
 .textareaField {
     padding: 15px 20px 15px 50px;
-    /* More padding, extra space for icon */
-    border: 2px solid var(--color-complementary-teal);
-    /* Thicker border */
+    border: 1px solid var(--color-border);
+    /* Borde más sutil */
     border-radius: 8px;
-    /* More rounded */
     font-size: 1.05em;
-    /* Slightly larger font */
     font-family: 'Montserrat Regular', sans-serif;
     color: var(--color-technologies-grey);
-    background-color: var(--color-white);
+    background-color: var(--color-input-background);
+    /* Nueva variable para el fondo del input */
     transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-    /* Inner shadow */
     width: calc(100% - 70px);
-    /* Adjust width considering padding and icon space */
 }
 
 [data-theme='dark'] .inputField,
 [data-theme='dark'] .textareaField {
-    background-color: var(--color-dark-background);
+    background-color: var(--color-dark-background-light);
+    /* Fondo más claro para inputs en dark mode */
     color: var(--color-white);
     border-color: var(--color-greenlime-dark);
     box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
@@ -314,7 +299,6 @@
     outline: none;
     border-color: var(--color-greenlime-dark);
     box-shadow: 0 0 0 3px rgba(95, 165, 144, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    /* Outer glow on focus */
 }
 
 [data-theme='dark'] .inputField:focus,
@@ -333,19 +317,14 @@
     transition: color 0.3s ease-in-out;
 }
 
-/* Adjust icon position for textarea - PENCIL ICON FIX */
 .inputGroup textarea+.inputIcon {
     top: 20px;
-    /* Adjusted to be higher, relative to top of textarea padding */
     transform: translateY(0);
-    /* Remove vertical centering as it's top-aligned */
 }
-
 
 .inputField:focus+.inputIcon,
 .textareaField:focus+.inputIcon {
     color: var(--color-greenlime-dark);
-    /* Icon color changes on focus */
 }
 
 [data-theme='dark'] .inputIcon {
@@ -357,13 +336,10 @@
     color: var(--color-greenlime-light);
 }
 
-
 .textareaField {
     resize: vertical;
     min-height: 150px;
-    /* Taller textarea */
     padding-top: 15px;
-    /* Adjust padding due to icon */
     padding-bottom: 15px;
 }
 
@@ -383,7 +359,6 @@
 
     #contact {
         padding: 30px 15px;
-        /* Smaller padding for smaller screens */
     }
 }
 
@@ -413,7 +388,6 @@
 
     .serviceGrid {
         grid-template-columns: 1fr;
-        /* Stack services on small screens */
         gap: 25px;
     }
 
@@ -427,12 +401,12 @@
 
     .contactForm {
         gap: 15px;
+        padding: 20px;
     }
 
     .inputField,
     .textareaField {
         padding: 10px 15px 10px 45px;
-        /* Adjust padding for smaller screens */
     }
 
     .inputIcon {
@@ -440,9 +414,88 @@
         font-size: 1.1em;
     }
 
-    /* Responsive adjustment for textarea icon */
     .inputGroup textarea+.inputIcon {
         top: 15px;
-        /* Adjust top for smaller screens */
     }
+}
+
+/* Estilos para el estado del servidor - MEJORADOS */
+.serverStatusContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    /* Bordes redondeados para pastilla */
+    font-size: 0.95em;
+    /* Ligeramente más pequeño */
+    font-weight: 600;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.serverStatusIcon {
+    margin-right: 8px;
+    font-size: 1.1em;
+    /* Ajuste el tamaño del icono */
+}
+
+.serverStatusIcon.online {
+    color: var(--color-white);
+    /* Icono blanco */
+}
+
+.serverStatusIcon.offline {
+    color: var(--color-white);
+    /* Icono blanco */
+}
+
+.serverStatusText {
+    color: var(--color-white);
+    /* Texto blanco */
+    transition: color 0.4s ease-in-out;
+}
+
+/* Colores de fondo y sombra para ONLINE */
+.serverStatusContainer.online {
+    background-color: #4CAF50;
+    /* Verde vibrante */
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+/* Colores de fondo y sombra para OFFLINE */
+.serverStatusContainer.offline {
+    background-color: #f44336;
+    /* Rojo de error */
+    box-shadow: 0 4px 10px rgba(244, 67, 54, 0.4);
+}
+
+/* Ajuste para el modo oscuro */
+[data-theme='dark'] .serverStatusContainer.online {
+    background-color: #66BB6A;
+    /* Verde más claro en modo oscuro para contraste */
+    box-shadow: 0 4px 10px rgba(102, 187, 106, 0.5);
+}
+
+[data-theme='dark'] .serverStatusContainer.offline {
+    background-color: #EF5350;
+    /* Rojo más claro en modo oscuro */
+    box-shadow: 0 4px 10px rgba(239, 83, 80, 0.5);
+}
+
+/* Nuevas variables CSS (si no las tienes ya en un archivo global) */
+/* Es recomendable definir estas variables en un archivo CSS global o en :root {} */
+:root {
+    --color-border: #e0e0e0;
+    --color-input-background: #ffffff;
+    --color-dark-background-light: #444444;
+    /* Un tono más claro que el fondo oscuro principal */
+}
+
+/* Dark mode overrides for new variables */
+[data-theme='dark'] {
+    --color-border: #555555;
+    --color-input-background: #333333;
 }
